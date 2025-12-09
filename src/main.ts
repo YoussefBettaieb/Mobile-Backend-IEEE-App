@@ -1,0 +1,22 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import cookieSession from 'cookie-session';
+import { ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  // Enable global validation pipe so DTO decorators from class-validator are enforced
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: false,
+      transform: true,
+    }),
+  );
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  await app.listen(process.env.PORT ?? 5000);
+}
+
+bootstrap();
