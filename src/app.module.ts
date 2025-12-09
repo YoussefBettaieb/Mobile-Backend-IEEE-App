@@ -13,7 +13,7 @@ import { Event } from './events/event.entity';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // ← VERY IMPORTANT
-      envFilePath: '.src/env', // ✅ Load from .env file
+      envFilePath: '.env',
     }),
     AuthModule,
     TypeOrmModule.forRoot({

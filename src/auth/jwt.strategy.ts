@@ -3,12 +3,16 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { UsersService } from '../users/users.service';
 import { UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private usersService: UsersService) {
-    const secret = process.env.JWT_SECRET || 'my_secret_key';
-    console.log('🔑 JWT Secret being used:', secret); // LOG THE SECRET
+  constructor(
+    private usersService: UsersService,
+    private configService: ConfigService,
+  ) {
+    const secret = configService.get<string>('JWT_SECRET') || 'my_secret_key';
+    console.log('🔑 JWT Secret being used:', secret);
 
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
