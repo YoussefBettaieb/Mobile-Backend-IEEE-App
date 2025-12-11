@@ -4,7 +4,6 @@ import { UsersService } from './users.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AdminGuard } from 'src/guards/admin.guard';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { BadRequestException } from '@nestjs/common';
 
 @Controller('api/users')
 export class UsersController {
@@ -17,9 +16,9 @@ export class UsersController {
   }
 
   @Get('me')
-  @UseGuards(JwtAuthGuard) // ✅ Only require JWT, not admin
+  @UseGuards(JwtAuthGuard)
   async getCurrentUser(@Request() req: any) {
-    return req.user; // User is set by JwtStrategy.validate()
+    return req.user;
   }
 
   @Put('me')
