@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { EventsModule } from './events/events.module';
 import { Event } from './events/event.entity';
+import { Registration } from './events/registration.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { Event } from './events/event.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [User, Event], // add your entities here
+      entities: [User, Event, Registration], // add your entities here
       synchronize: true, // auto-create tables in dev mode
     }),
     UsersModule,

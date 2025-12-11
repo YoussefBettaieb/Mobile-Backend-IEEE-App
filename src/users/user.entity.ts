@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import {
+  OneToMany,
   AfterInsert,
   AfterRemove,
   AfterUpdate,
@@ -7,6 +8,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Registration } from '../events/registration.entity';
 
 @Entity()
 export class User {
@@ -25,6 +27,11 @@ export class User {
 
   @Column({ default: false })
   isAdmin: boolean;
+
+  @OneToMany(() => Registration, (registration) => registration.user, {
+    cascade: true,
+  })
+  registrations: Registration[];
 
   @AfterInsert() // hooks executed after saving
   logInsert() {

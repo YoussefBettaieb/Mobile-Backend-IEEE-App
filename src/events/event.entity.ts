@@ -1,5 +1,5 @@
-import { Exclude } from 'class-transformer';
 import {
+  OneToMany,
   AfterInsert,
   AfterRemove,
   AfterUpdate,
@@ -7,7 +7,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-
+import { Registration } from '../events/registration.entity';
 export enum Chapter {
   CS = 'CS',
   RAS = 'RAS',
@@ -66,6 +66,11 @@ export class Event {
 
   @Column()
   speakerLinkedin: string;
+
+  @OneToMany(() => Registration, (registration) => registration.event, {
+    cascade: true,
+  })
+  userRegistrations: Registration[];
 
   @AfterInsert() // hooks executed after saving
   logInsert() {
