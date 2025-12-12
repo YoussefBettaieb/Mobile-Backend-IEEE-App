@@ -37,4 +37,27 @@ export class EventsService {
     }
     return this.repo.remove(event);
   }
+
+  /* async findFiltered(query: {
+    category?: string;
+    chapter?: string;
+    sort?: string;
+  }) {
+    const qb = this.repo.createQueryBuilder('event');
+
+    if (query.category) {
+      qb.andWhere('event.category = :category', { category: query.category });
+    }
+
+    if (query.chapter) {
+      qb.andWhere('event.chapter = :chapter', { chapter: query.chapter });
+    }
+
+    if (query.sort === 'date') {
+      qb.orderBy('event.date', 'ASC');
+    }
+
+    const events = await qb.getMany();
+    return { events };
+  } */
 }
