@@ -18,9 +18,9 @@ import { Registration } from './events/registration.entity';
     }),
     AuthModule,
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [User, Event, Registration], // add your entities here
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
       synchronize: true, // auto-create tables in dev mode
     }),
     UsersModule,
