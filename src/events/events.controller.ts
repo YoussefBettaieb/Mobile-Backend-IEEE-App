@@ -1,6 +1,7 @@
 import {
   Get,
   Post,
+  Delete,
   Body,
   Param,
   Query,
@@ -50,6 +51,11 @@ export class EventsController {
   @Post(':id/register')
   async registerToEvent(@Request() req: any, @Param('id') id: number) {
     return this.registrationService.registerUserToEvent(req.user.id, id);
+  }
+
+  @Delete(':id/register')
+  async unregisterFromEvent(@Request() req: any, @Param('id') id: number) {
+    return this.registrationService.unregister(req.user.id, id);
   }
 
   @Get(':id/registrations')

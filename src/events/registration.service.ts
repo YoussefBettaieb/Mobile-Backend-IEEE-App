@@ -39,10 +39,15 @@ export class RegistrationService {
     }
 
     event.registrations += 1;
-    await this.eventRepo.save(event);
+    const updatedEvent = await this.eventRepo.save(event);
 
     const registration = this.registrationRepo.create({ user, event });
-    return this.registrationRepo.save(registration);
+    await this.registrationRepo.save(registration);
+
+    return {
+      message: 'Successfully registered',
+      event: updatedEvent,
+    };
   }
 
   /* async getUserRegistrations(userId: number) {
@@ -79,12 +84,14 @@ export class RegistrationService {
     const registration = await this.registrationRepo.findOne({
       where: { user: { id: userId }, event: { id: eventId } },
     });
+    if (!registration) throw new NotFoundException('Registration not found');
+
     const event = await this.eventRepo.findOne({ where: { id: eventId } });
     if (event) {
       event.registrations -= 1;
       await this.eventRepo.save(event);
     }
-    if (!registration) throw new NotFoundException('Registration not found');
+
     return this.registrationRepo.remove(registration);
   }
 }
