@@ -33,6 +33,11 @@ export class RegistrationService {
       throw new BadRequestException('User already registered for this event');
     }
 
+    // Check if event has reached maximum capacity
+    if (event.registrations >= event.attendeesNeeded) {
+      throw new BadRequestException('Event has reached maximum capacity');
+    }
+
     event.registrations += 1;
     await this.eventRepo.save(event);
 
@@ -51,6 +56,23 @@ export class RegistrationService {
     const event = await this.eventRepo.findOne({ where: { id: eventId } });
     if (!event) throw new NotFoundException('Event not found');
     return event.registrations;
+  }
+
+  async getRegisteredUsers(eventId: number) {
+    const event = await this.eventRepo.findOne({ where: { id: eventId } });
+    if (!event) throw new NotFoundException('Event not found');
+
+    const registrations = await this.registrationRepo.find({
+      where: { event: { id: eventId } },
+      relations: ['user'],
+    });
+
+    return registrations.map((registration) => ({
+      id: registration.user.id,
+      email: registration.user.email,
+      fullName: registration.user.fullName,
+      registeredAt: registration.registeredAt,
+    }));
   }
 
   async unregister(userId: number, eventId: number) {

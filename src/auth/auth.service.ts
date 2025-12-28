@@ -56,6 +56,6 @@ export class AuthService {
   }
 
   async signout() {
-    return { message: 'User signed out successfully' };
+    return { message: 'Logged out successfully' };
   }
 }

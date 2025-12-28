@@ -56,4 +56,10 @@ export class EventsController {
   async getEventRegistrations(@Param('id') id: number) {
     return this.registrationService.getEventAttendees(id);
   }
+
+  @UseGuards(AdminGuard)
+  @Get(':id/registered-users')
+  async getRegisteredUsers(@Param('id') id: number) {
+    return this.registrationService.getRegisteredUsers(id);
+  }
 }
