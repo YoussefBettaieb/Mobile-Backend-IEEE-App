@@ -7,52 +7,89 @@ import {
   Min,
 } from 'class-validator';
 import { Chapter } from '../event.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateEventDto {
+  @ApiProperty({
+    example: 'Tech Talk on AI',
+    description: 'Title of the event',
+  })
   @IsString()
   title: string;
 
+  @ApiProperty({
+    example: 'An in-depth discussion on AI advancements.',
+    description: 'Description of the event',
+  })
   @IsString()
   description: string;
 
+  @ApiProperty({ example: '2024-12-01', description: 'Date of the event' })
   @IsDateString()
   date: Date;
 
+  @ApiProperty({ example: '10:00 AM', description: 'Start time of the event' })
   @IsDateString()
   startTime: Date;
 
+  @ApiProperty({ example: '12:00 PM', description: 'End time of the event' })
   @IsDateString()
   endTime: Date;
 
+  @ApiProperty({
+    example: 'Main Auditorium',
+    description: 'Location of the event',
+  })
   @IsString()
   category: string;
 
+  @ApiProperty({ example: 50, description: 'Number of attendees needed' })
   @IsInt()
   @Min(0)
   attendeesNeeded: number;
 
+  @ApiProperty({ example: 0, description: 'Number of registrations' })
   @IsInt()
   @Min(0)
   registrations: number;
 
+  @ApiProperty({ example: 'Beginner', description: 'Level of the event' })
   @IsString()
   level: string;
 
+  @ApiProperty({
+    example: Chapter.IAS,
+    description: 'Chapter hosting the event',
+  })
   @IsEnum(Chapter)
   chapter: Chapter;
 
+  @ApiProperty({ example: true, description: 'Is the event featured?' })
   @IsBoolean()
   isFeatured: boolean;
 
+  @ApiProperty({ example: 'John Doe', description: 'Full name of the speaker' })
   @IsString()
   speakerFullName: string;
 
+  @ApiProperty({
+    example: 'Experienced AI Researcher',
+    description: 'About the speaker',
+  })
   @IsString()
   aboutSpeaker: string;
 
+  @ApiProperty({
+    example: 'Basic understanding of AI concepts',
+    description: 'Prerequisites for the event',
+  })
   @IsString()
   prerequisites: string;
 
+  @ApiProperty({
+    example: 'https://www.linkedin.com/in/johndoe',
+    description: 'LinkedIn profile of the speaker',
+  })
   @IsString()
   speakerLinkedin: string;
 }
