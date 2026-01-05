@@ -1,98 +1,161 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# IEEE Mobile App - Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend REST API for the IEEE Mobile Application, built with NestJS, TypeScript, and PostgreSQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Description
 
-## Description
+A robust and scalable backend API that powers the IEEE Mobile Application, providing authentication, event management, user management, and event registration features for IEEE chapters and members.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Project setup
+- **Authentication & Authorization**
+  - JWT-based authentication
+  - User registration and login
+  - Admin role-based access control
+  - Password encryption with bcrypt
 
-```bash
-$ npm install
-```
+- **Event Management**
+  - Create, read, update, and delete events
+  - Event categorization by IEEE chapters (CS, RAS, PES/PELS, IAS, SIGHT, WIE)
+  - Featured events support
+  - Event registration system
+  - Speaker information management
 
-## Compile and run the project
+- **User Management**
+  - User profile management
+  - Admin privileges
+  - Secure password handling with automatic exclusion from API responses
 
-```bash
-# development
-$ npm run start
+- **API Documentation**
+  - Interactive Swagger/OpenAPI documentation
+  - Available at `/api/docs` endpoint
 
-# watch mode
-$ npm run start:dev
+## 🛠️ Tech Stack
 
-# production mode
-$ npm run start:prod
-```
+- **Framework:** NestJS 11.x
+- **Language:** TypeScript
+- **Database:** PostgreSQL (with SQLite support for development)
+- **ORM:** TypeORM
+- **Authentication:** Passport.js with JWT
+- **Validation:** class-validator & class-transformer
+- **API Documentation:** Swagger/OpenAPI
+- **Security:** bcryptjs for password hashing
 
-## Run tests
+## 📦 Installation
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+## ⚙️ Configuration
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Create a `.env` file in the root directory with the following variables:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+# Database
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+DB_DATABASE=ieee_app
+
+# JWT
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=7d
+
+# Application
+PORT=5000
+```
+
+## 🚀 Running the Application
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Development mode with auto-reload
+npm run start:dev
+
+# Production mode
+npm run start:prod
+
+# Debug mode
+npm run start:debug
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The API will be available at `http://localhost:5000`
 
-## Resources
+## 📚 API Documentation
 
-Check out a few resources that may come in handy when working with NestJS:
+Once the application is running, access the interactive API documentation at:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+http://localhost:5000/api/docs
+```
 
-## Support
+## 🏗️ Project Structure
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+src/
+├── auth/              # Authentication module (login, register, JWT)
+├── events/            # Events module (CRUD, registrations)
+├── users/             # Users module (profile management)
+├── guards/            # Custom guards (admin authorization)
+├── app.module.ts      # Root application module
+└── main.ts            # Application entry point
+```
 
-## Stay in touch
+## 🔐 API Endpoints Overview
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Authentication
 
-## License
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - Login and receive JWT token
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Events
+
+- `GET /events` - Get all events
+- `GET /events/:id` - Get event by ID
+- `POST /events` - Create new event (Admin only)
+- `PATCH /events/:id` - Update event (Admin only)
+- `DELETE /events/:id` - Delete event (Admin only)
+- `POST /events/:id/register` - Register for an event
+
+### Users
+
+- `GET /users` - Get all users (Admin only)
+- `GET /users/:id` - Get user by ID
+- `PATCH /users/:id` - Update user profile
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+```
+
+## 🎯 Key Features Implementation
+
+### Global Validation Pipe
+
+Automatically validates all incoming requests against DTO definitions using class-validator decorators.
+
+### Class Serializer Interceptor
+
+Automatically excludes sensitive data (like passwords) from API responses using class-transformer decorators.
+
+### CORS Enabled
+
+Cross-Origin Resource Sharing is enabled for mobile app integration.
+
+### TypeORM Integration
+
+Entity relationships, hooks, and migrations for database management.
+
+## 📄 License
+
+This project is licensed under the UNLICENSED license.
